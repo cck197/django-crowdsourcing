@@ -11,7 +11,11 @@ from django.core.urlresolvers import reverse
 from django.template import Node
 from django.utils.safestring import mark_safe
 from django.utils.html import escape, strip_tags, linebreaks
-from sorl.thumbnail.base import ThumbnailException
+try:
+    from sorl.thumbnail.base import ThumbnailException
+except ImportError:
+    class ThumbnailException(Exception):
+        pass
 
 from crowdsourcing.models import (
     extra_from_filters, AggregateResultCount, AggregateResultSum,
